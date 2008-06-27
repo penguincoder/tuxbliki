@@ -1,7 +1,6 @@
 class Page < ActiveRecord::Base
   validates_format_of :name, :with => /^[\w ]+$/
   validates_uniqueness_of :name
-  validates_format_of :department, :with => /^[\w]+$/, :allow_nil => true, :allow_blank => true
   
   has_many :comments, :order => 'created_at ASC'
   has_and_belongs_to_many :tags, :order => 'tags.name ASC'
