@@ -61,7 +61,7 @@ class Pages < Application
   def delete
     @page = Page.find_by_name(params[:id].gsub(/_/, ' '))
     raise NotFound unless @page
-    if @page.destroy!
+    if @page.destroy
       flash[:notice] = "The page was successfully destroyed."
       redirect url(:page)
     else
