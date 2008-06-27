@@ -1,0 +1,14 @@
+<% throw_content :for_sidebar do -%>
+  <% if allowed_to?(:send_invitations) -%><a href="<%= url(:new_invitation) -%>"><img src="/images/mail-message-new.png" alt="Send Invitation" /> Send Invitation</a><br /><% end -%>
+  <% unless logged_in? -%><a href="<%= url(:new_author) -%>"><img src="/images/contact-new.png" /> Sign up!</a><br /><% end -%>
+<% end -%>
+
+<% if @authors.empty? -%>
+  <p><em><strong>There were no authors found!</strong></em></p>
+<% else -%>
+  <ol>
+  <% @authors.each do |author| -%>
+    <li><a href="<%= url(:author, :id => author.name) -%>"><%= author.name -%></a></li>
+  <% end -%>
+  </ol>
+<% end -%>

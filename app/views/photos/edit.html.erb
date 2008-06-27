@@ -1,0 +1,17 @@
+<% throw_content :for_sidebar do -%>
+  <a href="<%= url(:album, :id => @photo.album.name.gsub(/ /, '_')) -%>"><img src="/images/camera-photo.png" /> Back to <%= @photo.album.name -%></a><br />
+  <a href="<%= url(:photo, :id => @photo.id) -%>"><img src="/images/image-x-generic.png" /> Back to photo</a><br />
+<% end -%>
+
+<%= error_messages_for :photo %>
+
+<% form_for :photo, :action => url(:photo, :id => @photo.id) do %>
+  <fieldset>
+    <legend>Change Photo Details</legend>
+    <p>Photo: <img src="<%= thumbnail_photo_url(@photo) -%>" /></p>
+    <p>Album: <%= select_control 'album_id', :collection => Album.for_select, :selected => (@photo.album.name rescue nil) -%></p>
+  </fieldset>
+  <p>
+    <%= submit_button 'Update' %>
+  </p>
+<% end -%>

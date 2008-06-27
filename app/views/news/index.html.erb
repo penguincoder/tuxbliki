@@ -1,0 +1,54 @@
+<% throw_content :for_sidebar do -%>
+  <div id="tag_cloud">
+    <p>Popular Tags</p>
+    <%= tag_cloud @tags %>
+  </div>
+  
+  <div id="things_i_do">
+    <div class="title">Things I Do</div>
+    <p>
+      <a href="http://github.com/penguincoder"><img src="/images/utilities-terminal.png" /> Code on Github</a><br />
+      <a href="http://del.icio.us/penguincoder"><img src="/images/delicious.med.gif" /> Del.icio.us Feed</a><br />
+    </p>
+  </div>
+<% end -%>
+
+<% @secondary_title = "Demolishing innocence for #{time_lost_in_words(Time.now, @oldest_date)}" unless @oldest_date.nil? -%>
+
+<% if @news.empty? -%>
+
+  <p><strong><em>There are no news posts, yet.</em></strong></p>
+
+<% else -%>
+
+  <% @news.each do |page| -%>
+    <%= partial 'pages/page', :with => [ page ] %>
+  <% end -%>
+
+  <% if @page_count > 0 -%>
+    <div id="pagination_links">
+
+      <% if @page > 0 -%>
+        <a href="<%= url(:news, :page => 0) -%>"><img src="/images/go-first.png" alt="First Page" /></a> <a href="<%= url(:news, :page => 0) -%>"><img src="/images/go-previous.png" alt="Previous Page" /></a>
+      <% end -%>
+
+      <% if @page_count > 1 -%>
+        <% (@page - 4).upto(@page - 1) do |i| ; next if i < 0 -%>
+          <a href="<%= url(:news, :page => i) -%>"><%= i + 1 -%></a> 
+        <% end %>
+
+        <%= @page + 1 %>
+
+        <% (@page + 1).upto(@page + 4) do |i| ; next if i >= @page_count -%>
+          <a href="<%= url(:news, :page => i) -%>"><%= i + 1 -%></a> 
+        <% end %>
+
+        <% if @page < @page_count - 1 -%>
+          <a href="<%= url(:news, :page => @page + 1) -%>"><img src="/images/go-next.png" alt="Next Page" /></a> <a href="<%= url(:news, :page => @page_count - 1) -%>"><img src="/images/go-last.png" alt="Last Page" /></a>
+        <% end -%>
+      <% end -%>
+
+    </div>
+  <% end -%>
+
+<% end -%>

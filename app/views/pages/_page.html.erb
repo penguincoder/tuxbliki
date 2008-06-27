@@ -1,0 +1,21 @@
+<div class="hentry" id="page-<%= page.object_id %>">
+  <h2 class="entry-title">
+    <%= show_page_link(page) %>
+    <span class='comment_count'><%= "#{page.comments.size} comments" unless page.comments.empty? %></span>
+  </h2>
+  <div class="vcard">
+    Posted by <span class="fn"><%= page.author.name rescue 'AUTHOR' -%></span>
+  </div>
+  <abbr class="published" title="<%= page.created_at %>"><%= time_lost_in_words page.created_at %> ago<% unless page.department.to_s.empty? -%> in the <%= page.department -%> department<% end -%>.</abbr>
+  <br class="clear" />
+  <div class="entry-content">
+    <%= show_page_description(page) %>
+  </div>
+
+  <ul class="meta">
+    <% unless page.tags.empty? -%>
+    <li>Tags: <%= page.tags.collect { |t| "<a href='#{url(:tag, :id => t.name)}' title='#{t.name}'>#{t.name}</a>" }.join(' ') -%></li>
+    <% end -%>
+    <li>Created: <%= page.created_at -%></li>
+  </ul>
+</div>

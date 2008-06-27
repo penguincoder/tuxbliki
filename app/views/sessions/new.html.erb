@@ -1,0 +1,12 @@
+<% form_tag :action => url(:sessions) do -%>
+  <fieldset>
+    <legend>Login</legend>
+    <p><%= text_field :name => :username, :label => 'Username: ', :id => 'username' -%></p>
+    <p><%= password_field :name => :password, :label => 'Password: ' -%></p>
+  </fieldset>
+  <p><%= submit_button 'Login' -%></p>
+<% end -%>
+
+<script type="text/javascript">
+  $('username').focus();
+</script>

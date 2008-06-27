@@ -1,0 +1,43 @@
+<% throw_content :for_sidebar do -%>
+  <a href="<%= url(:author, :id => @author.name.gsub(/ /, '_')) -%>"><img src="/images/go-home.png" alt="Author's Home" /> <%= @author.name -%></a><br />
+<% end -%>
+
+<script type="text/javascript">
+function check_all(form_name, field_name, checkbox_value)
+{
+  if(!document.forms[form_name])
+    return;
+  var check_boxes = document.forms[form_name].elements[field_name];
+  if(!check_boxes)
+    return;
+  var count_check_boxes = check_boxes.length;
+  if(!count_check_boxes)
+    check_boxes.checked = check_value;
+  else
+    // set the check value for all check boxes
+    for(var i = 0; i < count_check_boxes; i++)
+      check_boxes[i].checked = checkbox_value;
+}
+</script>
+
+<% form_for :permission, :action => url(:permission, @author), :id => 'permission_form' do -%>
+<%= hidden_field :name => '_method', :value => 'put' %>
+<fieldset>
+  <legend>Select Author's permissions</legend>
+  <p>Select: <a href="#" onclick="check_all('permission_form', 'permissions[]', true); return false">all</a> | <a href="#" onclick="check_all('permission_form', 'permissions[]', false); return false">none</a></p>
+  <ul style="list-style-type: none">
+    <% @permissions.each do |p| -%>
+    <%
+      attr = { :name => 'permissions[]', :boolean => false, :value => p.id }
+      if @author.permissions.include?(p)
+        attr[:checked] = true
+      end
+    -%>
+      <li><%= checkbox_field attr -%> <%= p.name -%></li>
+    <% end -%>
+  </ul>
+</fieldset>
+<p>
+  <%= submit_button 'Save' %>
+</p>
+<% end -%>

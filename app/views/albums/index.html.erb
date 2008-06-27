@@ -1,0 +1,40 @@
+<% throw_content :for_sidebar do -%>
+  <% if allowed_to?(:create_albums) -%><a href="<%= url(:new_album) -%>"><img src="/images/folder-new.png" alt="Create Album" /> Create An Album</a><br /><% end -%>
+  <% if allowed_to?(:upload_images) -%><a href="<%= url(:new_photo) -%>"><img src="/images/emblem-photos.png" /> Upload Image</a><br /><% end %>
+  <div id="tag_cloud">
+    <p>Popular Tags</p>
+    <%= tag_cloud @tags %>
+  </div>
+<% end -%>
+
+<% throw_content :for_stylesheet do -%>
+
+.photo_collection {
+  word-wrap: break-word;
+}
+
+.photo_collection_item {
+  float: right;
+  width: 170px;
+  min-height: 140px;
+  max-height: 200px;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #BBB;
+}
+
+<% end -%>
+
+<% if @albums.empty? -%>
+  <p><em><strong>There were no albums found!</strong></em></p>
+<% else -%>
+  <div class="photo_collection">
+  <% @albums.each do |album| -%>
+    <div class="photo_collection_item">
+      <p><a href="<%= url(:album, :id => album.name.gsub(/ /, '_')) -%>"><%= album.name -%></a> (<%= album.photos.size -%> photos)</p>
+      <% if album.album_thumbnail -%><a href="<%= url(:album, :id => album.name.gsub(/ /, '_')) -%>"><img src="<%= thumbnail_photo_url(album.album_thumbnail) -%>" /></a><% end -%>
+    </div>
+  <% end -%>
+  </div>
+<% end -%>

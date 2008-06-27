@@ -1,0 +1,21 @@
+<fieldset>
+  <legend>Post a comment on <em><%= @page.name -%></em></legend>
+  <%= hidden_field :name => 'page_id', :value => @page.name.gsub(/ /, '_') %>
+  <% if logged_in? -%>
+  <p>
+    Author: <%= Author.find(session[:author_id]).name -%><%= hidden_field :name => 'comment[author_id]', :value => session[:author_id] -%>
+  </p>
+  <% else -%>
+  <p>
+    <%= text_control :user, :label => 'Name: ', :size => 32 %>
+  </p>
+  <% end -%>
+
+  <p>
+    <%= text_control :url, :label => 'URL: ', :size => 60, :max_size => 256 %>
+  </p>
+
+  <p>
+    <%= text_area_control :comment, :label => 'Comment: ', :rows => 8, :cols => 60 %>
+  </p>
+</fieldset>

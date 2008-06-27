@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+
+<title>PenguinCoder's TuxBliki<% if @page_title -%> :: <%= @page_title -%><% end -%><% if @secondary_title -%> :: <%= @secondary_title -%><% end -%></title>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/stylesheets/application.css" type="text/css" media="screen" charset="utf-8" />
+
+<script src="/javascripts/prototype.js" type="text/javascript"></script>
+<script src="/javascripts/scriptaculous.js" type="text/javascript"></script>
+
+<style type="text/css">
+
+<%= catch_content :for_stylesheet %>
+
+</style>
+
+<script type="text/javascript">
+
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      oldonload();
+      func();
+    }
+  }
+}
+
+<%= catch_content :for_javascript %>
+</script>
+
+</head>
+<body>
+<div id="container">
+  <% flash.keys.each do |key| -%>
+    <div id="<%= key -%>">
+      <%= flash[key] %>
+    </div>
+  <% end -%>
+
+  <div id="header">
+    <span style="float: left; margin: 0px 20px 0px 0px"><img src="/images/penguincoder-logo.png" /></span>
+    <h1><%= @page_title or 'TuxBliki' -%></h1>
+    <% if @secondary_title -%><h2><%= @secondary_title -%></h2><% end -%>
+    <br style="clear: both" />
+<%
+  links = []
+  links << [ 'Blog', '/', 'internet-group-chat.png' ]
+  links << [ 'Wiki', url(:pages), 'text-html.png' ]
+  links << [ 'Post', url(:new_page), 'accessories-text-editor.png' ] if allowed_to?(:create_pages)
+  links << [ 'Photo Albums', url(:albums), 'camera-photo.png' ]
+  links << [ 'Authors', url(:authors), 'system-users.png' ]
+  links << [ 'Tags', url(:tags), 'preferences-desktop-font.png' ]
+  if logged_in?
+    links << [ 'Logout', url(:delete_session, :id => session[:author_id]), 'system-log-out.png' ]
+  else
+    links << [ 'Login', url(:new_session), 'system-lock-screen.png' ]
+  end
+  links << [ 'Help', url(:page, :id => 'Help'), 'help-browser.png' ]
+-%>
+    <div><%= links.collect { |l| "<a href='#{l[1]}'><img src='/images/#{l[2]}' alt='#{l[0]}' /> #{l[0]}</a>" }.join(' | ') -%></div>
+  </div>
+
+  <div id="page">
+    <div id="content">
+      <%= catch_content :for_layout %>
+    </div>
+    <div id="sidebar">
+      <%= catch_content :for_sidebar %>
+    </div>
+    <br style="clear: both" />
+  </div>
+
+  <div id="footer">
+    <hr />
+    <p>&copy; 2004 - 2008 penguincoder</p>
+    <ul>
+      <li><a href="http://merbivore.com">merb</a></li>
+      <li><a href="http://quotedprintable.com/pages/scribbish">scribbish</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

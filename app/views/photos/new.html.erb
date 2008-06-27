@@ -1,0 +1,17 @@
+<% throw_content :for_sidebar do -%>
+  <% if @photo.album -%><a href="<%= url(:album, :id => @photo.album.name.gsub(/ /, '_')) -%>"><img src="/images/camera-photo.png" /> Back to <%= @photo.album.name -%></a><br /><% end %>
+<% end -%>
+
+<%= error_messages_for :photo %>
+
+<% form_for :photo, :action => url(:photo), :multipart => true, :onsubmit => "$('indicator').style.display = 'inline';" do %>
+  <fieldset>
+    <legend>Upload a photo</legend>
+    <p>Album: <%= select_control 'album_id', :collection => Album.for_select, :selected => (@photo.album.name rescue nil) -%></p>
+    <p>File: <%= file_control 'file' -%></p>
+  </fieldset>
+  
+  <p>
+    <%= submit_button 'Create' %> <img src='/images/ajax-loader.gif' id='indicator' style='display:none;' />
+  </p>
+<% end -%>

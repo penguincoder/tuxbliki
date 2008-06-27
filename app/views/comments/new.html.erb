@@ -1,0 +1,12 @@
+<% throw_content :for_sidebar do -%>
+  <a href="<%= url(:page, :id => @page.name.gsub(/ /, '_')) -%>"><img src="/images/text-html.png" alt="Return to page" /> Return to <%= @page.name -%></a><br />
+<% end -%>
+
+<%= error_messages_for :comment %>
+
+<% form_for :comment, :action => url(:comment) do %>
+  <%= partial :comment_form %>
+  <p>
+    <%= submit_button 'Create' %>
+  </p>
+<% end -%>

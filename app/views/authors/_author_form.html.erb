@@ -1,0 +1,18 @@
+<fieldset>
+  <legend>Create an author</legend>
+  <p>
+    <%= text_control :name, :label => 'Name: ' %>
+  </p>
+  <p>
+    Invitation Code: <strong><em><%= (params[:invitation_code].to_s.empty? ? 'None! This will not work!' : params[:invitation_code]) -%><%= hidden_field :name => 'invitation_code', :value => params[:invitation_code] -%></em></strong>
+  </p>
+  <p>
+    <%= text_control :url, :label => 'Home URL: ' %>
+  </p>
+  <p>
+    <%= password_control :password, :label => 'Password: ', :size => 40 %>
+  </p>
+  <p>
+    <%= password_control :password_confirmation, :label => 'Password (Confirm): ', :size => 40 %>
+  </p>
+</fieldset>

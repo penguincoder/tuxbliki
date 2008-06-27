@@ -1,0 +1,11 @@
+<% form_for :invitation, :action => url(:invitation) do -%>
+  <fieldset>
+    <legend>Invite A Drinker</legend>
+    <p>
+      <%= text_control 'recipient', :label => 'Recipient: ' %>
+    </p>
+  </fieldset>
+  <p>
+    <%= submit_button 'Send' %>
+  </p>
+<% end -%>

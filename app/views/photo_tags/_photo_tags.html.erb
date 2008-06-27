@@ -1,0 +1,14 @@
+<h3>Tagged:</h3>
+
+<p>
+  <% if @photo.nil? or @photo.photo_tags.empty? -%>
+    None.
+  <% else -%>
+    <%= @photo.photo_tags.collect { |t|
+      str = "<span onmouseover=\"show_tag_at(#{t.x}, #{t.y})\" onmouseout=\"hide_tag_box()\" id=\"photo_tag_#{t.id}\">#{t.tag.name}"
+      if @editable
+        str += " (<a href='#' onclick='destroy_photo_tag(#{t.id}); return false;'><img src='/images/edit-delete.png' /> Remove</a>)"
+      end
+      str += "</span>" }.join(', ') %>
+  <% end -%>
+</p>

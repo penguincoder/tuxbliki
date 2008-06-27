@@ -1,0 +1,14 @@
+<% throw_content :for_sidebar do -%>
+  <a href="<%= url(:author, :id => @author.name.gsub(/ /, '_')) -%>"><img src="/images/go-home.png" alt="Author's Home" /> <%= @author.name -%></a><br />
+  <% if allowed_to?(:change_permissions) -%><a href="<%= url(:edit_permission, :id => @author.id) -%>"><img src="/images/preferences-system.png" /> Change Permissions</a><br /><% end %>
+<% end -%>
+
+<% if @permissions.empty? -%>
+<p><em><strong>User has no permissions.</strong></em></p>
+<% else -%>
+<ol>
+<% @permissions.each do |p| -%>
+  <li><%= p.name -%></li>
+<% end -%>
+</ol>
+<% end -%>

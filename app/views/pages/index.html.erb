@@ -1,0 +1,16 @@
+<% throw_content :for_sidebar do -%>
+  <div id="tag_cloud">
+    <p>Popular Tags</p>
+    <%= tag_cloud @tags %>
+  </div>
+<% end -%>
+
+<% if @pages.empty? -%>
+<p><strong><em>No pages were found!</em></strong></p>
+<% else -%>
+<ol>
+<% @pages.each do |page| -%>
+  <li><%= edit_page_link page -%></li>
+<% end -%>
+</ol>
+<% end -%>

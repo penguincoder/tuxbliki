@@ -1,0 +1,34 @@
+<fieldset>
+  <legend>Album Details</legend>
+  <p>
+    <%= text_control :name, :label => 'Name: ' %>
+  </p>
+  <h3>Tags</h3>
+  <p>
+    <p><a href="#" onclick="$('album[tag_names]').value = ''; return false;"><img src="/images/edit-clear.png" style="vertical-align: top;" /></a> <%= text_control 'tag_names', :size => 30 -%></p>
+    <div id="tag_auto_complete" class="auto_complete"></div>
+  </p>
+</fieldset>
+
+<script type="text/javascript">
+//<![CDATA[
+
+new Ajax.Autocompleter(
+  'album_tag_names',
+  'tag_auto_complete',
+  '/tags/auto_complete',
+  {
+    paramName: 'id',
+    updateElement: function(tag_name)
+    {
+      var new_tag = tag_name.innerHTML.gsub(/\<[^>]+\>/, '');
+      var existing_tags = $('album_tag_names').value.gsub(/( |^)[^ ]+$/, '');
+      var plus_space = (existing_tags.length == 0 ? '' : ' ');
+      $('album_tag_names').value = existing_tags + plus_space + new_tag;
+      $('album_tag_names').focus();
+    }
+  }
+);
+
+//]]>
+</script>

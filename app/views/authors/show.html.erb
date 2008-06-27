@@ -1,0 +1,8 @@
+<% throw_content :for_sidebar do -%>
+  <% if @author.id == session[:author_id] or allowed_to?(:edit_author, @author) -%><a href="<%= url(:edit_author, :id => @author.name) -%>" rel="nofollow"><img src="/images/document-save.png" /> Edit Author</a><br /><% end %>
+  <% if allowed_to?(:delete_authors) -%><a href="<%= url(:delete_author, :id => @author.name) -%>" onclick="if(!confirm('Are you sure you want to delete this author?')){return false;}"><img src="/images/edit-delete.png" /> Destroy Author</a><br /><% end %>
+  <% unless @author.url.to_s.empty? -%><a href="<%= h(@author.url) -%>" target="new"><img src="/images/go-home.png" /> Home URL</a><br /><% end -%>
+  <% if allowed_to?(:change_permissions) -%><a href="<%= url(:edit_permission, :id => @author.id) -%>"><img src="/images/preferences-system.png" /> Change Permissions</a><br /><% end %>
+<% end -%>
+
+<h1><%= @author.name -%></h1>

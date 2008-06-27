@@ -1,0 +1,16 @@
+---
+# This is a sample database file for the DataMapper ORM
+:development: &defaults
+  :adapter: mysql
+  :username: andrew
+  :password:
+  :socket: /var/lib/mysql/mysql.sock
+  :database: tuxbliki_development
+
+:test:
+  <<: *defaults
+  :database: tuxbliki_test
+
+:production:
+  <<: *defaults
+  :database: tuxbliki_production
