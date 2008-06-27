@@ -11,6 +11,7 @@ class Page < ActiveRecord::Base
   has_and_belongs_to_many :pages_that_link_to_me, :join_table => 'wiki_words', :foreign_key => :destination_id, :association_foreign_key => :source_id, :class_name => 'Page'
   
   before_create :set_author_id
+  before_save :sanitize_department
   after_save :update_wiki_words
   after_save :destroy_cache
   
@@ -49,6 +50,10 @@ class Page < ActiveRecord::Base
   end
   
   protected
+  
+  def sanitize_department
+    self.department.gsub!(/[^\w']/, '_').gsub!(/__+/, '_')
+  end
   
   def set_author_id
     self.author_id ||= Application.current_author_id
