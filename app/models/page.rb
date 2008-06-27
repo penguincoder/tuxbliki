@@ -51,7 +51,9 @@ class Page < ActiveRecord::Base
   protected
   
   def sanitize_department
-    self.department.to_s.gsub!(/[^\w']/, '_').gsub!(/__+/, '_')
+    self.department.to_s.gsub!(/[^\w']/, '_')
+    self.department.to_s.gsub!(/__+/, '_')
+    true
   end
   
   def set_author_id
