@@ -1,0 +1,5 @@
+TuxBliki -- A blog and wiki software setup for personal home pages. Has photos,
+photo tagging, tags and utter simplicity. Uses memcache profusely.
+
+Andrew Coleman penguincoder@gmail.com
+Released under GNU GPLv2.
