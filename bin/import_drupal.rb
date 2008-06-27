@@ -63,7 +63,7 @@ pages.each do |p|
     next unless comment['nid'].to_i == p.nid.to_i
     c2 = Time.now
     c2 -= (c2.to_i - comment['timestamp'].to_i).seconds
-    c = Comment.create(:comment => comment['comment'], :user => comment['name'], :url => comment['homepage'], :created_at => c2)
+    c = Comment.create(:comment => comment['comment'], :user => comment['name'], :url => comment['homepage'], :created_at => c2, :page_id => p.id)
     if c.new_record?
       \$stderr.puts "FAILED TO SAVE COMMENT ON PAGE #{p.id} NODE #{p.nid}"
       c.errors.each_full { |msg| \$stderr.puts "* #{msg}" }
