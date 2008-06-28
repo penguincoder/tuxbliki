@@ -5,7 +5,11 @@
   padding: 0px;
   width: <%= @width -%>px;
   height: <%= @height -%>px;
+<% if @photo.exist? -%>
   background-image: url('/photos/screen/<%= @photo.id -%>');
+<% else -%>
+  background-image: url('/images/image-missing.png');
+<% end -%>
   background-repeat: no-repeat;
 }
 #photo_block_container {
@@ -203,9 +207,11 @@ function toggle_photo_tag_editor(direction)
   </div>
 </div>
 
+<% if @photo.exist? -%>
 <div id="photo_tags">
   <%= partial 'photo_tags/photo_tags' %>
 </div>
+<% end -%>
 
 <script type="text/javascript">
   //<![CDATA[
@@ -223,9 +229,9 @@ function toggle_photo_tag_editor(direction)
 
 <% throw_content :for_sidebar do -%>
   <a href="<%= url(:album, :id => @photo.album.name.gsub(/ /, '_')) -%>"><img src="/images/camera-photo.png" /> Back to <%= @photo.album.name -%></a><br />
-  <% if allowed_to?(:edit_photo, @photo) -%><a href="<%= url(:edit_photo, :id => @photo.id) -%>" rel="nofollow"><img src="/images/document-save.png" /> Edit photo</a><br /><% end %>
+  <% if allowed_to?(:edit_photo, @photo) and @photo.exist? -%><a href="<%= url(:edit_photo, :id => @photo.id) -%>" rel="nofollow"><img src="/images/document-save.png" /> Edit photo</a><br /><% end %>
   <% if allowed_to?(:delete_photo, @photo) -%><a href="<%= url(:delete_photo, :id => @photo.id) -%>" onclick="if(!confirm('Are you sure you want to delete this photo?')){return false;}" rel="nofollow"><img src="/images/edit-delete.png" /> Destroy photo</a><br /><% end -%>
-  <a href="<%= photo_url(@photo) -%>"><img src="/images/image-x-generic.png" /> Download original</a><br />
+  <% if @photo.exist? -%><a href="<%= photo_url(@photo) -%>"><img src="/images/image-x-generic.png" /> Download original</a><br /><% end -%>
   <% if allowed_to?(:upload_images) -%><a href="<%= url(:new_photo, :photo => { :album_id => @photo.album_id }) -%>"><img src="/images/emblem-photos.png" /> Upload Image</a><br /><% end %>
-  <% if allowed_to?(:tag_photo) -%><span id="show_photo_tag_editor"><a href="#" onclick="toggle_photo_tag_editor(true)"><img src="/images/face-monkey.png" /> Tag Image</a></span><span id="hide_photo_tag_editor" style="display: none;"><a href="#" onclick="toggle_photo_tag_editor(false); return false;"><img src="/images/face-monkey.png" /> Done Tagging</a></span><br /><% end %>
+  <% if allowed_to?(:tag_photo) and @photo.exist? -%><span id="show_photo_tag_editor"><a href="#" onclick="toggle_photo_tag_editor(true)"><img src="/images/face-monkey.png" /> Tag Image</a></span><span id="hide_photo_tag_editor" style="display: none;"><a href="#" onclick="toggle_photo_tag_editor(false); return false;"><img src="/images/face-monkey.png" /> Done Tagging</a></span><br /><% end %>
 <% end -%>

@@ -8,9 +8,9 @@ class Photos < Application
     raise NotFound unless @photo
     @secondary_title = h(@photo.filename)
     
-    img = get_photo_version(600, 600)
-    @width = img.columns
-    @height = img.rows
+    img = get_photo_version(600, 600) rescue nil
+    @width = img.columns rescue 150
+    @height = img.rows rescue 150
     
     render
   end
@@ -68,21 +68,24 @@ class Photos < Application
     end
   end
 
-  def thumbnail
+  def send_rmagicked_image
     only_provides :html
     @photo = Photo.find(params[:id])
     raise NotFound unless @photo
-    send_data get_photo_version(150, 150).to_blob,
-      :filename => @photo.filename, :disposition => 'inline',
-      :type => @photo.content_type
+    if @photo.exist?
+      w = case params[:action]
+        when 'screen'
+          600
+        else
+          150
+      end
+      send_data get_photo_version(w, w).to_blob,
+        :filename => @photo.filename, :disposition => 'inline',
+        :type => @photo.content_type
+    else
+      send_file Merb.root + '/public/images/image-missing.png', :disposition => 'inline'
+    end
   end
-  
-  def screen
-    only_provides :html
-    @photo = Photo.find(params[:id])
-    raise NotFound unless @photo
-    send_data get_photo_version(600, 600).to_blob,
-      :filename => @photo.filename, :disposition => 'inline',
-      :type => @photo.content_type
-  end
+  alias_method :thumbnail, :send_rmagicked_image
+  alias_method :screen, :send_rmagicked_image
 end
