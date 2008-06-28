@@ -1,0 +1,25 @@
+<% if @page_count > 0 -%>
+  <div id="pagination_links">
+
+    <% if @page > 0 -%>
+      <a href="<%= url(@url_key, :page => 0) -%>"><img src="/images/go-first.png" alt="First Page" /></a> <a href="<%= url(@url_key, :page => 0) -%>"><img src="/images/go-previous.png" alt="Previous Page" /></a>
+    <% end -%>
+
+    <% if @page_count > 1 -%>
+      <% (@page - 5).upto(@page - 1) do |i| ; next if i < 0 -%>
+        <a href="<%= url(@url_key, :page => i) -%>"><%= i + 1 -%></a> 
+      <% end %>
+
+      <%= @page + 1 %>
+
+      <% (@page + 1).upto(@page + 5) do |i| ; next if i >= @page_count -%>
+        <a href="<%= url(@url_key, :page => i) -%>"><%= i + 1 -%></a> 
+      <% end %>
+
+      <% if @page < @page_count - 1 -%>
+        <a href="<%= url(@url_key, :page => @page + 1) -%>"><img src="/images/go-next.png" alt="Next Page" /></a> <a href="<%= url(@url_key, :page => @page_count - 1) -%>"><img src="/images/go-last.png" alt="Last Page" /></a>
+      <% end -%>
+    <% end -%>
+
+  </div>
+<% end -%>

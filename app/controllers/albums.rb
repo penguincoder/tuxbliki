@@ -1,6 +1,14 @@
 class Albums < Application
   def index
-    @albums = Album.find(:all)
+    acount = Album.count
+    @page = params[:page].to_i
+    per_page = 12
+    @page_count = (acount.to_f / per_page.to_f).ceil.to_i
+    @page = 0 if @page >= @page_count
+    @url_key = :albums
+    
+    @albums = Album.find(:all, :limit => per_page, :offset => (@page * per_page), :order => 'name ASC')
+    
     @tags = Album.popular_tags(30)
     display @albums
   end

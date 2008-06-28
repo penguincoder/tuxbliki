@@ -9,7 +9,6 @@ class Pages < Application
   def show
     @page = Page.find_by_name(params[:id].gsub(/_/, ' '))
     if @page.nil?
-      flash[:error] = "That page does not exist. You can now create it."
       redirect url(:new_page, :new_name => params[:id])
     else
       @comments = @page.comments
@@ -23,7 +22,7 @@ class Pages < Application
     only_provides :html
     @page = Page.new
     if params[:new_name]
-      flash.now[:notice] = 'That page does not exist, but you can create it.'
+      flash.now[:error] = 'That page does not exist, but you can create it.'
       @page.name = params[:new_name].gsub(/_/, ' ')
     end
     render
