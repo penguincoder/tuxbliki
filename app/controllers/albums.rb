@@ -19,10 +19,11 @@ class Albums < Application
     
     pcount = @album.photos.size
     @page = params[:page].to_i
-    per_page = 20
+    per_page = 12
     @page_count = (pcount.to_f / per_page.to_f).ceil.to_i
     @page = 0 if @page >= @page_count
-    @url_key = :photos
+    @url_key = :album
+    @paginate_id = @album.name.gsub(/ /, '_')
     
     @photos = @album.photos.find(:all, :limit => per_page, :offset => (@page * per_page), :order => 'filename ASC')
     
