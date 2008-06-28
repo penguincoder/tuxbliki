@@ -16,6 +16,16 @@ class Albums < Application
   def show
     @album = Album.find_by_name(params[:id].gsub(/_/, ' '))
     raise NotFound unless @album
+    
+    pcount = @album.photos.size
+    @page = params[:page].to_i
+    per_page = 20
+    @page_count = (pcount.to_f / per_page.to_f).ceil.to_i
+    @page = 0 if @page >= @page_count
+    @url_key = :photos
+    
+    @photos = @album.photos.find(:all, :limit => per_page, :offset => (@page * per_page), :order => 'filename ASC')
+    
     display @album
   end
 

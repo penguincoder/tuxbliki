@@ -7,8 +7,33 @@
 
 <% throw_content :for_stylesheet do -%>
 
-.photo {
-  margin: 10px;
+.photo_collection_item {
+  word-wrap: break-word;
+  width: 150px;
+  min-height: 150px;
+  max-height: 150px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 3px;
+  border: 1px solid #BBB;
+  float: left;
+  position: relative;
+}
+
+.col_1 {
+  margin-left: 5px;
+}
+
+.col_2 {
+  margin-left: 5px;
+}
+
+.col_3 {
+  margin-left: 5px;
+}
+
+.col_0 {
+  margin-left: 5px;
 }
 
 <% end -%>
@@ -17,9 +42,7 @@
 <h1><%= @album.name -%></h1>
 
 <% @album.photos.each_with_index do |photo, idx| -%>
-  <% if (idx + 1) % 3 == 1 -%><p><% end -%>
-  <span class="photo"><a href="<%= url(:photo, photo) -%>" rel="nofollow" onclick="window.open(this.href);return false;"><img src="<%= thumbnail_photo_url(photo) -%>" /></a></span>
-  <% if (idx + 1) % 3 == 0 or @album.photos.size == (idx + 1) -%></p><% end -%>
+  <div class="photo_collection_item col_<%= (idx + 1) % 4 -%>"><a href="<%= url(:photo, photo) -%>" rel="nofollow" onclick="window.open(this.href);return false;"><img src="<%= thumbnail_photo_url(photo) -%>" /></a></div>
 <% end -%>
 
 <% unless @album.tags.empty? -%>
