@@ -22,6 +22,20 @@ class Photo < ActiveRecord::Base
     "#{Merb.root}/public/photos/#{id}"
   end
   
+  ##
+  # Checks to see if the file is found on the filesystem.
+  #
+  def exist?
+    File.exist?(self.pathname)
+  end
+  
+  ##
+  # Returns the full path to the file on the filesystem.
+  #
+  def pathname
+    "#{self.base_directory}/#{self.filename}"
+  end
+  
   def self.popular_tags(limit = nil)
     query = "SELECT tags.id, tags.name, count(*) AS count FROM photo_tags, tags, photos WHERE tags.id = tag_id AND photo_tags.photo_id = photos.id GROUP BY tags.id, tags.name ORDER BY tags.name ASC"
     query << " LIMIT #{limit}" unless limit.nil?
