@@ -261,20 +261,6 @@
   padding: 3px;
 }
 
-#content .thumbnail_box {
-  border: 1px solid #DDD;
-  background-color: #F2F2F2;
-  float: left;
-  margin: 15px;
-  padding: 5px;
-  text-align: center;
-}
-
-#content .photo_box {
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
 /*--------------------------------------------------------------
  Sidebar
  --------------------------------------------------------------*/
@@ -316,49 +302,37 @@
 
 #sidebar em { font-style: normal; }
 
-/* Live-search and results */
-#sidebar .search p {
-  margin: 0;
+#tag_cloud, #things_i_do {
+  padding: 5px 10px 10px 10px;
+  margin-right: 15px;
+  margin-left: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  border: 1px solid #BBB;
 }
 
-#sidebar .search p input {
-  font-size: 11px; width: 92%;
+#tag_cloud p, #things_i_do .title {
+  font-size: 1.1em;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px dashed #BBB;
+  margin: 0; padding: 0;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
 }
 
-#sidebar .search .loading {
-  background: url(/images/ajax-loader.gif) no-repeat left 50%;
-  margin: 1em 0; padding: 0 0 0 20px;
-  height: 15px;
+#things_i_do {
+  text-align: left;
 }
 
-#sidebar .search .results {
-  margin: 0 0 1.25em;
-}
-
-#sidebar .search .results h3 {
-  margin-top: 1em;
-}
-
-#sidebar .search .results p {
-  font: bold 14px "lucidamac bold", "lucida grande", verdana, arial, helvetica, sans-serif;
-  margin: 0 0 0.5em;
-}
-
-#sidebar .search .results ul {
-  margin: 0; padding: 3px;
-}
-
-#sidebar .search .results li { background: #ffc; padding: 0.2em; }
-
-#sidebar .search .results a:link,
-#sidebar .search .results a:visited {
-  color: #222;
-}
-
-#sidebar .search .results a:hover,
-#sidebar .search .results a:active  {
-  color: #fff;
-}
+.tag_cloud_1, .tag_cloud_2 {font-size: 1.0em;}
+.tag_cloud_3, .tag_cloud_4 {font-size: 1.2em;}
+.tag_cloud_5, .tag_cloud_6 {font-size: 1.4em;}
+.tag_cloud_7, .tag_cloud_8 {font-size: 1.6em;}
+.tag_cloud_9, .tag_cloud_10 {font-size: 1.8em;}
+.tag_cloud_11, .tag_cloud_12 {font-size: 2.0em;}
+.tag_cloud_2, .tag_cloud_4, .tag_cloud_6, .tag_cloud_8, .tag_cloud_10, .tag_cloud_12 {font-weight: bold;}
 
 /*--------------------------------------------------------------
  Footer
@@ -394,6 +368,7 @@
 #footer ul {
   width: 40%;
   margin: 0; padding: 0;
+  margin-right: 10px;
   list-style-type: none;
   text-align: right;
   float: right;
@@ -402,14 +377,6 @@
 #footer li {
   margin: 0; padding: 0 0 0 1em;
   display: inline;
-}
-
-#tag_cloud p {
-  text-align: center;
-  margin: 0px;
-  padding: 0px;
-  font-size: 1.1em;
-  font-weight: bold;
 }
 
 /* form errors */
@@ -494,36 +461,7 @@
   background-color: #E0E0E0;
 }
 
-#tag_cloud, #things_i_do {
-  padding: 5px 10px 10px 10px;
-  margin: auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  text-align: center;
-  border: 1px solid #BBB;
-}
-
-#tag_cloud p, #things_i_do .title {
-  font-size: 1.1em;
-  text-align: center;
-  font-weight: bold;
-  border-bottom: 1px dashed #BBB;
-  margin-bottom: 5px;
-  padding-bottom: 5px;
-}
-
-#things_i_do {
-  text-align: left;
-}
-
-.tag_cloud_1, .tag_cloud_2 {font-size: 1.0em;}
-.tag_cloud_3, .tag_cloud_4 {font-size: 1.2em;}
-.tag_cloud_5, .tag_cloud_6 {font-size: 1.4em;}
-.tag_cloud_7, .tag_cloud_8 {font-size: 1.6em;}
-.tag_cloud_9, .tag_cloud_10 {font-size: 1.8em;}
-.tag_cloud_11, .tag_cloud_12 {font-size: 2.0em;}
-.tag_cloud_2, .tag_cloud_4, .tag_cloud_6, .tag_cloud_8, .tag_cloud_10, .tag_cloud_12 {font-weight: bold;}
-
+/* auto completion styles */
 .auto_complete {
   width: 350px;
   background: #ddd;
