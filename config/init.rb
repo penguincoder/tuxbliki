@@ -11,6 +11,7 @@ use_orm :activerecord
 use_test :rspec
 
 dependencies 'merb_helpers', 'merb_has_flash', 'merb-mailer'
+require 'merb_exceptions'
 require 'redcloth'
 require 'RMagick'
 require 'memcache'
@@ -24,4 +25,7 @@ Merb::BootLoader.after_app_loads do
     memcache_connection_str = 'localhost:11211'
   end
   CACHE = MemCache.new memcache_connection_str
+  
+  Merb::Mailer.config = { :sendmail_path => '/usr/sbin/sendmail' }
+  Merb::Mailer.delivery_method = :sendmail
 end

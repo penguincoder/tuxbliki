@@ -1,0 +1,5 @@
+:exceptions:
+  :app_name: TuxBliki
+  :email_from: exceptions@penguincoder.org
+  :email_addresses:
+  - webmaster@penguincoder.org
