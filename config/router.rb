@@ -1,6 +1,10 @@
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do |r|
-  r.match('/node/(node/)?:id').to(
+  r.match('/node/node/:id').to(
+    :controller => 'node',
+    :action => 'show'
+  )
+  r.match('/node/:id').to(
     :controller => 'node',
     :action => 'show'
   )
