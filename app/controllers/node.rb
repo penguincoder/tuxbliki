@@ -12,4 +12,16 @@ class Node < Application
     headers['Location'] = purl
     return "<html><body>You are being <a href=\"#{purl}\">redirected</a>.</body></html>"
   end
+  
+  def chora
+    if params[:program] and params[:program] =~ /PenguinCoder|tuxwiki/i
+      raise NotFound
+    end
+    safe_program = params[:program].gsub(/\W/, '').downcase
+    gurl = "http://github.com/penguincoder/#{safe_program}"
+    Merb.logger.info("Permenant Chora redirect for #{safe_program}")
+    self.status = 301
+    headers['Location'] = gurl
+    return "<html><body>You are being <a href=\"#{gurl}\">redirected</a>.</body></html>"
+  end
 end

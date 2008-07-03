@@ -1,8 +1,12 @@
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do |r|
-  r.match('/node/:id').to(
+  r.match('/node/(node/)?:id').to(
     :controller => 'node',
     :action => 'show'
+  )
+  r.match('/horde/chora/:phpaction.php/:program').to(
+    :controller => 'node',
+    :action => 'chora'
   )
   r.resources :pages
   r.resources :comments
