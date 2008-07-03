@@ -24,7 +24,7 @@ class Comments < Application
     @comment = Comment.find(params[:id])
     raise NotFound unless @comment
     @page = @comment.page
-    if @comment.destroy!
+    if @comment.destroy
       flash[:notice] = 'Comment was destroyed.'
       redirect url(:page, :id => @page.name.gsub(/ /, '_'))
     else

@@ -55,7 +55,7 @@ class Authors < Application
   def delete
     @author = Author.find_by_name(params[:id])
     raise NotFound unless @author
-    if @author.destroy!
+    if @author.destroy
       flash[:notice] = 'The author was destroyed.'
       if @author.id == session[:author_id]
         redirect url(:delete_session, :id => session[:author_id])
