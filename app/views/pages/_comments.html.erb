@@ -6,7 +6,7 @@
       <span style="float: right"><% if allowed_to?(:delete_comment, comment) -%><a href="<%= url(:delete_comment, comment) -%>" onclick="if(!confirm('Are you sure you want to delete this comment?')){return false;}" rel="nofollow"><img src="/images/edit-delete.png" /></a><% end -%></span>
       
       <div class="author">
-        <cite><%= position + 1 -%>. <%= (comment.url.blank?) ? h(comment.name) : "<a href='#{comment.url}'>#{h(comment.name)}</a>" %></cite>
+        <cite><%= position + 1 -%>. <%= (comment.url.blank?) ? h(comment.name) : "<a href='#{h(comment.url)}'>#{h(comment.name)}</a>" %></cite>
         <abbr title="<%= comment.created_at %>">said <%= time_lost_in_words comment.page.created_at, comment.created_at %> later:</abbr>
       </div>
       <div class="content">
