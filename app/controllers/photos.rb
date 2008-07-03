@@ -88,4 +88,19 @@ class Photos < Application
   end
   alias_method :thumbnail, :send_rmagicked_image
   alias_method :screen, :send_rmagicked_image
+  
+  def set_album_thumbnail
+    only_provides :html
+    @photo = Photo.find(params[:id])
+    raise NotFound unless @photo
+    @album = @photo.album
+    raise NotFound unless @album
+    if @album.update_attribute(:album_thumbnail_id, @photo.id)
+      flash[:notice] = 'Very nice!'
+    else
+      flash[:error] = 'Could not update the album:<br />'
+      @album.errors.each_full { |msg| flash[:error] += "#{msg}<br />" }
+    end
+    redirect url(:photo, @photo)
+  end
 end

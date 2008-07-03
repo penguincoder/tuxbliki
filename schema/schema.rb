@@ -9,13 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 11) do
+ActiveRecord::Schema.define(:version => 12) do
 
   create_table "albums", :force => true do |t|
-    t.string "name", :limit => 128
+    t.string  "name",               :limit => 128
+    t.integer "album_thumbnail_id", :limit => 11
   end
 
   add_index "albums", ["name"], :name => "index_albums_on_name"
+  add_index "albums", ["album_thumbnail_id"], :name => "index_albums_on_album_thumbnail_id"
 
   create_table "albums_tags", :id => false, :force => true do |t|
     t.integer "album_id", :limit => 11
@@ -111,6 +113,10 @@ ActiveRecord::Schema.define(:version => 11) do
 
   add_index "photos", ["author_id"], :name => "index_photos_on_author_id"
   add_index "photos", ["album_id"], :name => "index_photos_on_album_id"
+
+  create_table "schema_info", :id => false, :force => true do |t|
+    t.integer "version", :limit => 11
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id"

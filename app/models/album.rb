@@ -5,6 +5,7 @@ class Album < ActiveRecord::Base
   has_and_belongs_to_many :tags, :order => 'tags.name ASC'
   has_many :photos
   after_create :save_tags
+  belongs_to :album_thumbnail, :class_name => 'Photo'
   
   def tag_names
     self.tags.collect { |t| t.name }.join(' ')
@@ -20,10 +21,6 @@ class Album < ActiveRecord::Base
       new_tags << t
     end
     self.tags = new_tags
-  end
-  
-  def album_thumbnail
-    self.photos.first
   end
   
   def self.for_select

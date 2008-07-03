@@ -34,6 +34,10 @@ Merb::Router.prepare do |r|
     :controller => 'photos',
     :action => 'screen'
   )
+  r.match('/photos/set_album_thumbnail/:id').to(
+    :controller => 'photos',
+    :action => 'set_album_thumbnail'
+  )
   r.resources :photo_tags
   r.match('/').to(
     :controller => 'news',
