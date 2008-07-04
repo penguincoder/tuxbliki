@@ -3,6 +3,21 @@
   <% if allowed_to?(:edit_album) -%><a href="<%= url(:edit_album, :id => @album.name.gsub(/ /, '_')) -%>" rel="nofollow"><img src="/images/document-save.png" /> Edit Album</a><br /><% end %>
   <% if allowed_to?(:delete_albums) -%><a href="<%= url(:delete_album, :id => @album.name.gsub(/ /, '_')) -%>" onclick="if(!confirm('Are you sure you want to delete this album?')){return false;}"><img src="/images/edit-delete.png" /> Destroy Album</a><br /><% end %>
   <% if allowed_to?(:upload_images) -%><a href="<%= url(:new_photo, :photo => { :album_id => @album.id }) -%>"><img src="/images/emblem-photos.png" /> Upload Image</a><br /><% end %>
+  
+  <% unless @album.tags.empty? -%>
+  <div class="tag_cloud">
+    <p>Album Tags</p>
+    <%= @album.tags.collect { |t| "<a href='#{url(:tag, :id => t.name)}' title='#{t.name}'>#{t.name}</a>" }.join(' ') %>
+  </div>
+  <% end -%>
+  
+  <% ptags = @photos.collect { |p| p.photo_tags.collect { |pt| pt.tag.name } }.flatten.uniq -%>
+  <% unless ptags.empty? -%>
+  <div class="tag_cloud">
+    <p>Tags in Photos</p>
+    <%= ptags.collect { |t| "<a href='#{url(:tag, :id => t)}' title='#{t}'>#{t}</a>" }.join(' ') %>
+  </div>
+  <% end -%>
 <% end -%>
 
 <% throw_content :for_stylesheet do -%>
@@ -32,13 +47,6 @@
 <% @photos.each_with_index do |photo, idx| -%>
   <div class="photo_collection_item col_<%= (idx + 1) % 3 -%>"><a href="<%= url(:photo, photo) -%>" rel="nofollow" onclick="window.open(this.href);return false;"><img src="<%= thumbnail_photo_url(photo) -%>" /></a></div>
   <% if (idx + 1) % 3 == 0 or @photos.last == photo -%><br style="clear:both" /><% end -%>
-<% end -%>
-
-<% unless @album.tags.empty? -%>
-  <br style="clear: both;" />
-  <ul class="meta">
-    <li>Tags: <%= @album.tags.collect { |t| "<a href='#{url(:tag, :id => t.name)}' title='#{t.name}'>#{t.name}</a>" }.join(' ') -%></li>
-  </ul>
 <% end -%>
 </div>
 

@@ -1,7 +1,7 @@
 <% throw_content :for_sidebar do -%>
   <% if allowed_to?(:create_albums) -%><a href="<%= url(:new_album) -%>"><img src="/images/folder-new.png" alt="Create Album" /> Create An Album</a><br /><% end -%>
   <% if allowed_to?(:upload_images) -%><a href="<%= url(:new_photo) -%>"><img src="/images/emblem-photos.png" /> Upload Image</a><br /><% end %>
-  <div id="tag_cloud">
+  <div class="tag_cloud">
     <p>Popular Tags</p>
     <%= tag_cloud @tags %>
   </div>

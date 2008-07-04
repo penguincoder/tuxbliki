@@ -302,7 +302,7 @@
 
 #sidebar em { font-style: normal; }
 
-#tag_cloud, #things_i_do {
+.tag_cloud, #things_i_do {
   padding: 5px 10px 10px 10px;
   margin-right: 15px;
   margin-left: auto;
@@ -312,7 +312,7 @@
   border: 1px solid #BBB;
 }
 
-#tag_cloud p, #things_i_do .title {
+.tag_cloud p, #things_i_do .title {
   font-size: 1.1em;
   text-align: center;
   font-weight: bold;
