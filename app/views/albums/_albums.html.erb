@@ -1,0 +1,13 @@
+<% if albums.nil? or albums.empty? -%>
+  <p><em><strong>There were no albums found!</strong></em></p>
+<% else -%>
+
+<% albums.each_with_index do |album, index| -%>
+  <div class="photo_album col_<%= (index + 1) % 3 -%>">
+    <p><a href="<%= url(:album, :id => album.name.gsub(/ /, '_')) -%>"><%= album.name -%></a> (<%= album.photos.size -%> photos)</p>
+    <% if album.album_thumbnail -%><a href="<%= url(:album, :id => album.name.gsub(/ /, '_')) -%>"><img src="<%= thumbnail_photo_url(album.album_thumbnail) -%>" /></a><% end -%>
+  </div>
+<% end -%>
+<br style="clear: both" />
+
+<% end -%>

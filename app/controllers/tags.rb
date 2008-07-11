@@ -10,8 +10,9 @@ class Tags < Application
     raise NotFound unless @tag
     @pages = @tag.pages
     @albums = @tag.albums
+    @photos = @tag.photos
     @secondary_title = "Content tagged with #{@tag.name}"
-    display @tag
+    render
   end
 
   def new

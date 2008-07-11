@@ -1,0 +1,10 @@
+<% if photos.nil? or photos.empty? %>
+  <p><em><strong>There were no photos found!</strong></em></p>
+<% else -%>
+
+<% photos.each_with_index do |photo, idx| -%>
+  <div class="photo col_<%= (idx + 1) % 3 -%>"><a href="<%= url(:photo, photo) -%>" rel="nofollow" onclick="window.open(this.href);return false;"><img src="<%= thumbnail_photo_url(photo) -%>" /></a></div>
+  <% if (idx + 1) % 3 == 0 or photos.last == photo -%><br style="clear:both" /><% end -%>
+<% end -%>
+
+<% end -%>

@@ -11,8 +11,9 @@
 <% end %>
 
 <h2>Albums</h2>
-<% if @albums.empty? -%>
-<p><em><strong>None!</strong></em></p>
-<% else -%>
-<ol><%= @albums.collect { |a| "<li><a href='#{url(:album, :id => a.name.gsub(/ /, '_'))}'>#{a.name}</a></li>" }.join -%></ol>
-<% end -%>
+<%= partial 'albums/albums', :albums => @albums %>
+
+<br />
+
+<h2>Photos</h2>
+<%= partial 'albums/photos', :photos => @photos %>
