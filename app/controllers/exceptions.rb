@@ -5,7 +5,7 @@ class Exceptions < Application
   def not_found
     @page_title = 'Error 404'
     @secondary_title = 'Document Not Found'
-    render_and_notify :format => :html
+    render
   end
 
   # handle NotAcceptable exceptions (406)
