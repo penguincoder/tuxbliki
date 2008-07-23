@@ -3,3 +3,14 @@
   :email_from: exceptions@penguincoder.org
   :email_addresses:
   - webmaster@penguincoder.org
+:tuxbliki:
+  :site_name: PenguinCoder's TuxBliki
+  :news_heading: Blogging!
+  :motto: Demolishing innocence for
+  :motto_with_date: true
+  :logo: penguincoder-logo.png
+  :related_links_title: Things I Do
+  :related_links:
+  - <a href="http://github.com/penguincoder"><img src="/images/utilities-terminal.png" /> Github</a>
+  - <a href="http://del.icio.us/penguincoder"><img src="/images/delicious.med.gif" /> Del.icio.us</a>
+  - <a href="http://barleysodas.com">BarleySodas</a> Beer Wiki With Lots More
