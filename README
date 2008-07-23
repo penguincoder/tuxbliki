@@ -1,5 +1,19 @@
 TuxBliki -- A blog and wiki software setup for personal home pages. Has photos,
 photo tagging, tags and utter simplicity. Uses memcache profusely.
 
+Gem Requirements
+* merb
+* merb_activerecord
+* activerecord
+* merb_helpers
+* merb_has_flash
+* merb-mailer
+* mongrel/thin
+* rmagick
+* RedCloth
+* rubyzip (for mass image imports)
+* mysql (recommended -- others may work fine, too)
+
 Andrew Coleman penguincoder@gmail.com
-Released under GNU GPLv2.
+Released under GNU GPLv2
+http://www.gnu.org/licenses/gpl-2.0.html
