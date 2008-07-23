@@ -37,14 +37,8 @@ function addLoadEvent(func) {
 </head>
 <body>
 <div id="container">
-  <% flash.keys.each do |key| -%>
-    <div id="<%= key -%>">
-      <%= flash[key] %>
-    </div>
-  <% end -%>
-
   <div id="header">
-    <span style="float: left; margin: 0px 20px 0px 0px"><img src="/images/<%= tuxconfig[:logo] -%>" /></span>
+    <span style="float: left; margin-right: 10px;"><img src="/images/<%= tuxconfig[:logo] -%>" /></span>
     <h1><%= @page_title or 'TuxBliki' -%></h1>
     <% if @secondary_title -%><h2><%= @secondary_title -%></h2><% end -%>
     <br style="clear: both" />
@@ -65,7 +59,13 @@ function addLoadEvent(func) {
 -%>
     <div><%= links.collect { |l| "<a href='#{l[1]}'><img src='/images/#{l[2]}' alt='#{l[0]}' /> #{l[0]}</a>" }.join(' | ') -%></div>
   </div>
-
+  
+  <% flash.keys.each do |key| -%>
+    <div id="<%= key -%>">
+      <%= flash[key] %>
+    </div>
+  <% end -%>
+  
   <div id="page">
     <div id="content">
       <%= catch_content :for_layout %>
@@ -77,12 +77,7 @@ function addLoadEvent(func) {
   </div>
 
   <div id="footer">
-    <hr />
-    <p>&copy; 2004 - <%= Date.today.year -%> penguincoder</p>
-    <ul>
-      <li><a href="http://merbivore.com">merb</a></li>
-      <li><a href="http://quotedprintable.com/pages/scribbish">scribbish</a></li>
-    </ul>
+    <span id="copyright">&copy; 2004 - <%= Date.today.year -%> penguincoder</span>
   </div>
 </div>
 </body>

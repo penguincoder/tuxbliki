@@ -1,36 +1,274 @@
-/*--------------------------------------------------------------
- Application.css
- Imports all stylesheets; sets defaults for bare elements
- --------------------------------------------------------------*/
+/* Baseline Junebug style */
 
-@import 'layout.css';
-@import 'content.css';
-
-@media print { #sidebar { display: none; }
-               #content { float: none; width: 90%; }
-               #content pre { color: #000; background: #eee; }
-               #content form.comments { display: none; } }
-
-body {
-  background: url(/images/background.gif) repeat-x left top;
-  font: normal 12px "lucida grande", verdana, sans-serif;
+a:link, a:visited {
+    text-decoration: none;
+    color: #0000cc;
+}
+a:hover {
+    text-decoration: underline;
+    color: #0000cc;
 }
 
-input,
-textarea { font: normal 12px "bitstream vera sans", verdana, sans-serif; }
+form { display: inline; }
 
-abbr  { border: none; }
-cite  { font-style: normal; }
-a img { border: none; padding: 0; margin: 0; vertical-align: middle; text-decoration: none; }
+span.actions a {
+    margin-right: 5px;
+}
 
-a:link,  a:visited { color: #000; text-decoration: none; }
-a:hover, a:active  { text-decoration: underline; }
+input.button {
+    margin: 5px 4px;
+}
+
+input, textarea {
+    padding: 4px 2px 1px 2px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+/*    font-family:"Bitstream Vera Sans Mono", "Monaco", "Courier", monospace;*/
+}
+
+input, textarea, pre, code {
+    font-family: monospace;
+}
+
+textarea {
+    width: 95%;
+}
+
+del {
+    color: #999;
+    background-color: #ddd;
+}
+
+ins {
+    background-color: #cfc;
+    text-decoration: none;
+    color: #000;
+}
+
+/* PAGE STRUCTURE */
+body {
+    background: #d7d7d7;
+    text-align: center;
+    min-width: 800px;
+    margin: 0px;
+}
+
+#container {
+    font-family: 'Lucida Grande', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#header {
+    background-color: #6677aa;
+    padding: 8px 25px 10px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+#header a {
+    color: #ffffff;
+}
+
+#header a:hover {
+  text-decoration: none;
+}
+
+#header h1 {
+    font-size: 167%;
+    padding-bottom: 5px;
+    font-weight: normal;
+}
+
+#header h2 {
+  float: right;
+  font-size: 110%;
+}
+
+#page {
+    background-color: #ffffff;
+    border:5px solid #929292;
+    border-width:0 5px 5px 0;
+}
+
+#footer {
+    border: 1px solid #eee;
+    background-color: #ddd;
+    color: #333;
+    font-size: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 150%;
+}
+
+.formbox {
+    border-top: 1px solid #ccc;
+    background-color: #eee;
+    padding: 0 15px 10px 15px;
+}
+
+/* WIKI CONTENT STYLES */
+#content {
+    min-height: 300px;
+    width: 605px;
+    padding-left: 20px;
+    float: left;
+}
+
+#content h2, #content h3, #content h4, #content h5 {
+    font-weight: normal;
+    color: #447744;
+    border-bottom: 2px dotted #bbb;
+    margin-left: -5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 1px 5px;
+}
+
+#content h1 {
+    font-size:  182%;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #bbb;
+}
+
+#content h2 {
+    font-size:  140%;
+    background-color: #edf9ef;
+}
+
+#content h3 {
+    font-size:  129%;
+}
+
+#content h4 {
+    font-size:  107%;
+}
+
+#content h5 {
+    font-size:  100%;
+}
+
+#content ul {
+    list-style-type: square;
+}
+
+#content li {
+    line-height: 150%;
+}
+
+#content ol {
+    list-style-type: decimal;
+}
+
+#content p {
+    line-height: 145%;
+    margin: 15px 0px;
+}
+
+#content em {
+    font-style: italic;
+}
+
+#content strong {
+    font-weight: bold;
+}
+
+#content label {
+    font-weight: bold;
+}
+
+#content code {
+    background: #f4f4f4;
+    padding: 5px;
+}
+
+#content code.clean {
+    background: #ffffff;
+    padding: 2px;
+}
+
+#content pre code{
+    padding: 0px;
+}
+
+#content pre {
+    display: block;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 8px 20px;
+    margin: 15px 0px;
+    overflow: auto;
+}
+
+#content pre.clean {
+    display: block;
+    background: #ffffff;
+    border: 0px;
+    padding: 0;
+    margin: 0;
+}
 
 /* http://longren.org/2006/09/27/wrapping-text-inside-pre-tags */
-pre {
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap !important;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
+/* Browser specific (not valid) styles to make preformatted text wrap */
+#content pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+#content table {
+}
+
+#content th, #content td {
+    padding: 2px 5px 2px 5px;
+    border: solid #eee;
+    vertical-align: top;
+}
+
+#content th {
+    font-weight: bold;
+    background-color: #d7e0ff;
+}
+
+.entry {
+
+}
+
+.entry ul {
+    margin: 10px 0px 10px 15px;
+}
+
+.entry ol {
+    margin: 10px 0px 10px 24px;
+}
+
+.entry .entry-author {
+  margin: 0px;
+  padding: 0px;
+  color: #444;
+  font-size: 90%;
+}
+
+.entry .entry-author .fn, .entry .entry-author .dept {
+  font-style: italic;
+}
+
+.entry .entry-tags {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  font-size: 80%;
+  padding: 5px;
+  list-style-type: none;
+}
+
+#sidebar {
+  width: 150px;
+  float: right;
+  font-size: 90%;
+  padding-top: 10px;
 }
