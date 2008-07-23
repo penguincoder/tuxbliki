@@ -131,7 +131,7 @@ body {
 #content h1 {
     font-size:  182%;
     margin-bottom: 10px;
-    border-bottom: 2px solid #bbb;
+    border-bottom: 2px dotted #bbb;
 }
 
 #content h2 {
