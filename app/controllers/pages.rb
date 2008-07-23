@@ -20,7 +20,7 @@ class Pages < Application
   def new
     @page_title = 'Make a new page'
     only_provides :html
-    @page = Page.new
+    @page = Page.new :published => true
     if params[:new_name]
       flash.now[:error] = 'That page does not exist, but you can create it.'
       @page.name = params[:new_name].gsub(/_/, ' ')
