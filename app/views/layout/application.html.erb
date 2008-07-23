@@ -57,7 +57,7 @@ function addLoadEvent(func) {
   end
   links << [ 'Help', url(:page, :id => 'Help'), 'help-browser.png' ]
 -%>
-    <div><%= links.collect { |l| "<a href='#{l[1]}'><img src='/images/#{l[2]}' alt='#{l[0]}' /> #{l[0]}</a>" }.join(' | ') -%></div>
+    <div class="navigation_links"><%= links.collect { |l| "<a href='#{l[1]}'><img src='/images/#{l[2]}' alt='#{l[0]}' /> #{l[0]}</a>" }.join(' | ') -%></div>
   </div>
   
   <% flash.keys.each do |key| -%>
