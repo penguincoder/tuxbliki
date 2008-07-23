@@ -5,16 +5,12 @@
   </div>
   
   <div id="related_links">
-    <div class="title">Things I Do</div>
+    <div class="title"><%= tuxconfig[:related_links_title] -%></div>
     <p>
-      <a href="http://github.com/penguincoder"><img src="/images/utilities-terminal.png" /> Code on Github</a><br />
-      <a href="http://del.icio.us/penguincoder"><img src="/images/delicious.med.gif" /> Del.icio.us Feed</a><br />
-      <a href="http://barleysodas.com">BarleySodas</a> Beer Wiki With Lots More<br />
+      <%= tuxconfig[:related_links].join('<br />') %>
     </p>
   </div>
 <% end -%>
-
-<% @secondary_title = "Demolishing innocence for #{time_lost_in_words(Time.now, @oldest_date)}" unless @oldest_date.nil? -%>
 
 <% if @news.empty? -%>
 

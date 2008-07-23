@@ -21,4 +21,8 @@ class Application < Merb::Controller
     
     img
   end
+  
+  def tuxconfig
+    Merb::Plugins.config[:tuxbliki]
+  end
 end

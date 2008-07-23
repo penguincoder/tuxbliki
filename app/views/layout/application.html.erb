@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
 
-<title>PenguinCoder's TuxBliki<% if @page_title -%> :: <%= @page_title -%><% end -%><% if @secondary_title -%> :: <%= @secondary_title -%><% end -%></title>
+<title><%= tuxconfig[:site_name] -%><% if @page_title -%> :: <%= @page_title -%><% end -%><% if @secondary_title -%> :: <%= @secondary_title -%><% end -%></title>
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="/stylesheets/application.css" type="text/css" media="screen" charset="utf-8" />
@@ -44,7 +44,7 @@ function addLoadEvent(func) {
   <% end -%>
 
   <div id="header">
-    <span style="float: left; margin: 0px 20px 0px 0px"><img src="/images/penguincoder-logo.png" /></span>
+    <span style="float: left; margin: 0px 20px 0px 0px"><img src="/images/<%= tuxconfig[:logo] -%>" /></span>
     <h1><%= @page_title or 'TuxBliki' -%></h1>
     <% if @secondary_title -%><h2><%= @secondary_title -%></h2><% end -%>
     <br style="clear: both" />

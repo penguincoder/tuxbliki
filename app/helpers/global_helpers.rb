@@ -92,5 +92,9 @@ module Merb
     def indicator
       "<img src='/images/ajax-loader.gif' id='indicator' alt='indicator' style='display: none;' />"
     end
+    
+    def tuxconfig
+      Merb::Plugins.config[:tuxbliki]
+    end
   end
 end
