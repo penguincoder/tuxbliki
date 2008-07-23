@@ -14,6 +14,10 @@ Gem Requirements
 * rubyzip (for mass image imports)
 * mysql (recommended -- others may work fine, too)
 
+Special installation instructions
+* Make sure you modify config/plugins.yml to your liking. I have included a
+  template for convienence.
+
 Andrew Coleman penguincoder@gmail.com
 Released under GNU GPLv2
 http://www.gnu.org/licenses/gpl-2.0.html
