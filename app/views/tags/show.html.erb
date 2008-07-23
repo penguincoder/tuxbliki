@@ -10,12 +10,8 @@
 <ol><%= @pages.collect { |p| "<li><a href='#{url(:page, :id => p.name.gsub(/ /, '_'))}'>#{p.name}</a></li>" }.join -%></ol>
 <% end %>
 
-<br />
-
 <h2>Albums</h2>
 <%= partial 'albums/albums', :albums => @albums %>
-
-<br />
 
 <h2>Photos</h2>
 <%= partial 'albums/photos', :photos => @photos %>
