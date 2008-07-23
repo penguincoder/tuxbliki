@@ -23,24 +23,15 @@ module Merb
     def show_page_description(page)
       page_cache = Cache.get(page.cache_name)
       if page_cache.nil?
-        redcloth_opts = [
-          :textile,
-          :block_textile_prefix,
-          :block_textile_lists,
-          :inline_textile_code,
-          :inline_textile_link,
-          :inline_textile_image,
-          :inline_textile_span,
-          :glyphs_textile
-        ]
-        desc = h(page.description.to_s).to_s.gsub(/\&quot\;/, '"')
+        desc = h(page.description.to_s).to_s.gsub(/\&quot\;/, '"').gsub(/\&amp\;/, '&')
         # i need pre/code block together... because i code :)
         desc.gsub!("&lt;pre&gt;&lt;code&gt;", "<pre><code>")
-        desc.gsub!("&lt;/pre&gt;&lt;/code&gt;", "</pre></code>")
+        desc.gsub!("&lt;/code&gt;&lt;/pre&gt;", "</code></pre>")
         rc = RedCloth.new(desc)
         rc.no_span_caps = true
         rc.filter_styles = true
-        page_cache = rc.to_html(redcloth_opts).gsub(Page.wiki_word_pattern) do |match|
+        rc.filter_html = true
+        page_cache = rc.to_html.gsub(Page.wiki_word_pattern) do |match|
           pg_name = $1
           if Page.exists?(pg_name)
             "<a class='wiki_link' style='color: #00F;' href='#{url(:page, pg_name.gsub(/ /, '_'))}'>#{pg_name}</a>"
