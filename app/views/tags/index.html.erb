@@ -1,7 +1,7 @@
 <% if @tags.empty? -%>
   <p><em><strong>No tags were found!</strong></em></p>
 <% else -%>
-  <div class="tag_cloud">
+  <div id="tag_cloud">
     <h2 style="margin-top: 0px;">All Tags in TuxBliki</h2>
     <%= tag_cloud @tags -%>
   </div>

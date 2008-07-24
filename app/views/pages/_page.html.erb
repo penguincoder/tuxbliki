@@ -1,5 +1,4 @@
 <div class="entry" id="page-<%= page.id %>">
-
   <h2 class="entry-title">
     <%= show_page_link(page) %>
     <span class='comment_count'><%= "#{page.comments.size} comments" unless page.comments.empty? %></span>
@@ -14,8 +13,22 @@
   </div>
 
   <% unless page.tags.empty? -%>
-  <div class="entry-tags">
+  <div class="entry-tags" id="tags-<%= page.id -%>">
     Tagged: <%= page.tags.collect { |t| "<a href='#{url(:tag, :id => t.name)}' title='#{t.name}'>#{t.name}</a>" }.join(' ') -%>
   </div>
+  <script type="text/javascript">
+  //<![CDATA[
+  addLoadEvent(function(){
+    new curvyCorners({
+      tl: { radius: 5 },
+      tr: { radius: 5 },
+      bl: { radius: 5 },
+      br: { radius: 5 },
+      antiAlias: true,
+      autoPad: true
+    }, $('tags-<%= page.id -%>')).applyCornersToAll();
+  });
+  //]]>
+  </script>
   <% end -%>
 </div>
