@@ -5,7 +5,7 @@
   <% if allowed_to?(:upload_images) -%><a href="<%= url(:new_photo, :photo => { :album_id => @album.id }) -%>"><img src="/images/emblem-photos.png" /> Upload Image</a><br /><% end %>
   
   <% ptags = @photos.collect { |p| p.photo_tags.collect { |pt| pt.tag.name } }.flatten.uniq -%>
-  <% if !@album.tags.empty? and !ptags.empty? -%>
+  <% if !@album.tags.empty? or !ptags.empty? -%>
   <div id="tag_cloud">
     <% unless @album.tags.empty? -%>
       <p>Album Tags</p>
