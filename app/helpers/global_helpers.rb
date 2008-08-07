@@ -11,7 +11,7 @@ module Merb
       res << "<br /><div id='errorExplanation'>"
       res << "<p>The following errors prevented the model from being saved:</p>"
       res << "<ol>"
-      obj.errors.each do |field, msg|
+      obj.errors.each_full do |msg|
         res << "<li>#{msg}</li>"
       end
       res << "</ol>"
