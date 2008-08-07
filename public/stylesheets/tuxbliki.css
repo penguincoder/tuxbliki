@@ -39,7 +39,7 @@ a img {
 .tag_cloud_2, .tag_cloud_4, .tag_cloud_6, .tag_cloud_8, .tag_cloud_10, .tag_cloud_12 {font-weight: bold;}
 
 /* form errors */
-.fieldWithErrors {
+.error {
   border: 1px solid #F00;
 }
 
