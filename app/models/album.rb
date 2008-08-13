@@ -3,7 +3,7 @@ class Album < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_format_of :name, :with => /^[\w ]+$/
   has_and_belongs_to_many :tags, :order => 'tags.name ASC'
-  has_many :photos
+  has_many :photos, :order => 'filename ASC'
   after_create :save_tags
   belongs_to :album_thumbnail, :class_name => 'Photo'
   

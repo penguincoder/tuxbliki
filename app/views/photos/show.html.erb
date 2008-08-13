@@ -153,18 +153,23 @@ function toggle_photo_tag_editor(direction)
       }
     );
     
-    // transition in editor
-    new Effect.BlindDown('photo_tag_editor', {duration: 1.5});
+    // transition editor and navigation
+    new Effect.Fade('pagination_links');
+    new Effect.Appear('photo_tag_editor');
   }
   else
   {
+    // remove box if shown
+    hide_tag_box();
+    
     // toggle buttons
     $('show_photo_tag_editor').show();
     $('hide_photo_tag_editor').hide();
     block_box = true;
     
-    // transition out editable blocks
-    new Effect.BlindUp('photo_tag_editor', {duration: 1.5});
+    // transition out editable blocks and navigation
+    new Effect.Fade('photo_tag_editor');
+    new Effect.Appear('pagination_links');
     
     // update tags to read only
     new Ajax.Updater(
@@ -178,6 +183,76 @@ function toggle_photo_tag_editor(direction)
       }
     );
   }
+}
+
+function highlight_tag(tag_id)
+{
+  
+}
+
+var last_x = 0;
+var last_y = 0;
+function check_for_tag_mouseovers(event)
+{
+  // skip this if you are editing
+  if(!block_box)
+    return;
+  
+  // figure out the real coordinates
+  var xcoord = (event.offsetX ? event.offsetX : (event.pageX - $('photo_block').offsetLeft));
+  var ycoord = (event.offsetY ? event.offsetY : (event.pageY - $('photo_block').offsetTop));
+  
+  // save coordinates for cop-out later
+  if(xcoord == last_x && ycoord == last_y)
+    return;
+  last_x = xcoord;
+  last_y = ycoord;
+  
+  // figure out the box area here
+  var min_x = xcoord - 50;
+  if(min_x < 0)
+    min_x = 0
+  var max_x = xcoord + 50;
+  if(max_x > <%= @width -%>)
+    max_x = <%= @width -%>;
+  var min_y = ycoord - 50;
+  if(min_y < 0)
+    min_y = 0;
+  var max_y = ycoord + 50;
+  if(max_y > <%= @height -%>)
+    max_y = <%= @height -%>;
+  
+  // remove the box, in case there is no match...
+  hide_tag_box();
+  
+  // remove tag highlighting
+  unhighlight_tags();
+  
+  // find all in the area, show the box then highlight the tags
+  tag_array.select(function(entry){
+    return entry[0] >= min_x && entry[0] <= max_x && entry[1] >= min_y && entry[1] <= max_y;
+  }).each(function(entry){
+    show_tag_at(entry[0], entry[1]);
+    // show which tag, too
+    highlight_tag(entry[2]);
+  });
+}
+
+function unhighlight_tags()
+{
+  $$('.photo_tags_for_mouseover').each(function(entry){
+    entry.style.fontWeight = 'normal';
+  });
+}
+
+function unhighlight_tag(tag_id)
+{
+  $('photo_tag_' + tag_id).style.fontWeight = 'normal';
+}
+
+function highlight_tag(tag_id)
+{
+  $('photo_tag_' + tag_id).style.fontWeight = 'bold';
 }
 
 <% end -%>
@@ -201,8 +276,14 @@ function toggle_photo_tag_editor(direction)
   </form>
 </div>
 
+<% if @current_index and @max_index and @photo.album -%>
+<div id="pagination_links">
+  <% if @current_index > 0 -%><a href="<%= url(:photo, @album_photos[0]) -%>"><img src="/images/go-first.png" /></a> <% end -%><% if @current_index > 1 -%><a href="<%= url(:photo, @album_photos[@current_index - 1]) -%>"><img src="/images/go-previous.png" /></a> <% end -%><%= @current_index + 1 -%> of <%= @max_index + 1 -%> <% if @current_index < @max_index - 1 -%><a href="<%= url(:photo, @album_photos[@current_index + 1]) -%>"><img src="/images/go-next.png" /></a> <% end -%><% if @current_index < @max_index -%><a href="<%= url(:photo, @album_photos[@max_index]) -%>"><img src="/images/go-last.png" /></a><% end -%>
+</div>
+<% end -%>
+
 <div id="photo_block_container">
-  <div id="photo_block" onclick='set_coordinates_from_event(event);'>
+  <div id="photo_block" onclick='set_coordinates_from_event(event);' onmousemove='check_for_tag_mouseovers(event)'>
     <div id="photo_tag_box" style="display: none;"><div id="inner_photo_tag_box"></div></div>
   </div>
 </div>

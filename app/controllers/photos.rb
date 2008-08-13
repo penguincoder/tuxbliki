@@ -12,6 +12,9 @@ class Photos < Application
     @width = img.columns rescue 150
     @height = img.rows rescue 150
     
+    @album_photos = @photo.album.photos.find :all, :order => 'filename ASC'
+    @max_index = @album_photos.size - 1
+    @current_index = @album_photos.index(@photo)
     render
   end
 
