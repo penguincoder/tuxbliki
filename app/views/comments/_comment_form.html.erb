@@ -18,4 +18,10 @@
   <p>
     <%= text_area_control :comment, :label => 'Comment: ', :rows => 8, :cols => 60 %>
   </p>
+<% unless logged_in? -%>
+  <p>
+    <strong>Ident</strong>
+    <%= recaptcha_tags %>
+  </p>
+<% end -%>
 </fieldset>

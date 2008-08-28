@@ -12,6 +12,7 @@ Gem Requirements
 * rmagick
 * RedCloth
 * rubyzip (for mass image imports)
+* libxml-ruby
 * mysql (recommended -- others may work fine, too)
 
 Special installation instructions

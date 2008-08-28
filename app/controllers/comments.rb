@@ -1,4 +1,7 @@
 class Comments < Application
+  
+  include Ambethia::ReCaptcha::Controller
+  
   def new
     only_provides :html
     @page = Page.find_by_name(params[:page_id].gsub(/_/, ' '))
@@ -12,7 +15,7 @@ class Comments < Application
     raise NotFound unless @page
     @comment = Comment.new(params[:comment])
     @comment.page_id = @page.id
-    if @comment.save
+    if (logged_in? or verify_recaptcha(@comment)) and @comment.save
       flash[:notice] = 'Great success!'
       redirect url(:page, :id => params[:page_id])
     else
