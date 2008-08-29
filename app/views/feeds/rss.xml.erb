@@ -1,0 +1,26 @@
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title><%= tuxconfig[:site_name] -%></title>
+    <link><%= absolute_url(:controller => :news, :action => :index) -%></link>
+    <description><%= tuxconfig[:news_heading] -%></description>
+    <language>en-us</language>
+<% @items.each_with_index do |item, index| -%>
+<% break if index >= 25 -%>
+    <item>
+<% if item.is_a? Page -%>
+      <title><%= item.name -%></title>
+      <link><%= absolute_url(:page, item.name.gsub(/ /, '_')) -%></link>
+      <description><%= item.published? ? 'New blog post' : 'New wiki page' -%></description>
+      <dc:creator><%= item.author.name -%></dc:creator>
+      <dc:date><%= item.created_at -%></dc:date>
+<% elsif item.is_a? Comment -%>
+      <title>Comment on <%= item.page.name -%></title>
+      <link><%= absolute_url(:page, item.page.name.gsub(/ /, '_')) -%></link>
+      <description>new comment by <%= item.name -%>!</description>
+      <dc:creator><%= item.name -%></dc:creator>
+      <dc:date><%= item.created_at.to_date -%></dc:date> 
+<% end -%>
+    </item>
+<% end -%>
+  </channel>
+</rss>

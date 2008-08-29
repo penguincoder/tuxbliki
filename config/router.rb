@@ -43,4 +43,8 @@ Merb::Router.prepare do |r|
     :controller => 'news',
     :action => 'index'
   )
+  r.match('/feeds/:action.xml').to(
+    :controller => 'feeds',
+    :format => 'xml'
+  )
 end
