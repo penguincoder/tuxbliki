@@ -5,8 +5,9 @@ class Node < Application
   
   def show
     page = Page.find_by_nid(params[:id])
-    raise NotFound unless page
-    purl = url(:page, :id => page.name.gsub(/ /, '_'))
+    raise NotFound unless page or params[:id] == 'feed'
+    purl = url(:page, :id => page.name.gsub(/ /, '_')) rescue ''
+    purl = url(:controller => :feeds, :action => :rss, :format => :xml) if params[:id] == 'feed'
     Merb.logger.info("Permenant Redirect Drupal Node to #{purl}")
     self.status = 301
     headers['Location'] = purl
