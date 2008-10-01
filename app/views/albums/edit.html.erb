@@ -7,6 +7,6 @@
 <% form_for :album, :action => url(:album, :id => @album.name.gsub(/ /, '_')) do %>
   <%= partial :album_form %>
   <p>
-    <%= submit_button 'Update' %>
+    <%= submit 'Update' %>
   </p>
 <% end -%>

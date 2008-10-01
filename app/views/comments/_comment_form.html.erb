@@ -7,16 +7,16 @@
   </p>
   <% else -%>
   <p>
-    <%= text_control :user, :label => 'Name: ', :size => 32 %>
+    <%= text_field :user, :label => 'Name: ', :size => 32 %>
   </p>
   <% end -%>
 
   <p>
-    <%= text_control :url, :label => 'URL: ', :size => 60, :max_size => 256 %>
+    <%= text_field :url, :label => 'URL: ', :size => 60, :max_size => 256 %>
   </p>
 
   <p>
-    <%= text_area_control :comment, :label => 'Comment: ', :rows => 8, :cols => 60 %>
+    <%= text_area :comment, :label => 'Comment: ', :rows => 8, :cols => 60 %>
   </p>
 <% unless logged_in? -%>
   <p>

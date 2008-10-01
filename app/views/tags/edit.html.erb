@@ -1,11 +1,11 @@
-<% form_for :tag, :action => url(:tag, :id => @tag.name) do -%>
+<%= form_for :tag, :action => url(:tag, :id => @tag.name) do -%>
   <fieldset>
     <legend>Change a tag's name</legend>
     <p>
-      <%= text_control :name, :label => 'Name: ' -%>
+      <%= text_field :name, :label => 'Name: ' -%>
     </p>
   </fieldset>
   <p>
-    <%= submit_button 'Save' %>
+    <%= submit 'Save' %>
   </p>
-<% end -%>
+<% end =%>

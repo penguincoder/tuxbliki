@@ -1,30 +1,30 @@
 <%= error_messages_for :page %>
 
-<% form_for :page, :action => url(:page) do -%>
+<%= form_for :page, :action => url(:page) do %>
   <fieldset>
   <legend>Create a page</legend>
   <h3 style="margin-top: 10px;">Name</h3>
-  <p><%= text_control :name, :size => 50 %></p>
+  <p><%= text_field :name, :size => 50 -%></p>
   
-  <p><%= checkbox_control :published, :label => ' Published in blog?', :value => "1" %></p>
+  <p><label>Published in blog? <%= check_box :published -%></label></p>
   
   <h3>Department</h3>
-  <p><%= text_control :department, :size => 50 %></p>
+  <p><%= text_field :department, :size => 50 -%></p>
   
   <h3>Description</h3>
-  <p><%= text_area_control :description, :rows => 10, :cols => 70 %></p>
+  <p><%= text_area :description, :rows => 10, :cols => 70 -%></p>
   
   <h3>Tags</h3>
   <p>
-    <p><a href="#" onclick="$('page[tag_names]').value = ''; return false;"><img src="/images/edit-clear.png" style="vertical-align: top;" /></a> <%= text_control 'tag_names', :size => 30 -%></p>
+    <p><a href="#" onclick="$('page[tag_names]').value = ''; return false;"><img src="/images/edit-clear.png" style="vertical-align: top;" /></a> <%= text_field :tag_names, :size => 30 -%></p>
     <div id="tag_auto_complete" class="auto_complete"></div>
   </p>
   </fieldset>
   
   <br />
   
-  <p><%= submit_button 'Create' %></p>
-<% end -%>
+  <p><%= submit 'Create' %></p>
+<% end =%>
 
 <script type="text/javascript">
 //<![CDATA[

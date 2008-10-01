@@ -1,8 +1,8 @@
 <%= error_messages_for :album %>
 
-<% form_for :album, :action => url(:album) do %>
+<%= form_for :album, :action => url(:album) do %>
   <%= partial :album_form %>
   <p>
-    <%= submit_button 'Create' %>
+    <%= submit 'Create' %>
   </p>
-<% end -%>
+<% end =%>

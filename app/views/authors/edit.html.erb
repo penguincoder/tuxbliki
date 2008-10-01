@@ -1,8 +1,8 @@
 <%= error_messages_for :author %>
 
-<% form_for :author, :action => url(:author, :id => @author.name) do -%>
+<%= form_for :author, :action => url(:author, :id => @author.name) do -%>
   <%= partial :author_form %>
   <p>
-    <%= submit_button 'Update' %>
+    <%= submit 'Update' %>
   </p>
-<% end -%>
+<% end =%>

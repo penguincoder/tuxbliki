@@ -20,7 +20,7 @@ function check_all(form_name, field_name, checkbox_value)
 }
 </script>
 
-<% form_for :permission, :action => url(:permission, @author), :id => 'permission_form' do -%>
+<%= form_for :permission, :action => url(:permission, @author), :id => 'permission_form' do -%>
 <%= hidden_field :name => '_method', :value => 'put' %>
 <fieldset>
   <legend>Select Author's permissions</legend>
@@ -33,11 +33,11 @@ function check_all(form_name, field_name, checkbox_value)
         attr[:checked] = true
       end
     -%>
-      <li><%= checkbox_field attr -%> <%= p.name -%></li>
+      <li><%= checkbox attr -%> <%= p.name -%></li>
     <% end -%>
   </ul>
 </fieldset>
 <p>
-  <%= submit_button 'Save' %>
+  <%= submit 'Save' %>
 </p>
 <% end -%>

@@ -4,14 +4,14 @@
 
 <%= error_messages_for :photo %>
 
-<% form_for :photo, :action => url(:photo), :multipart => true, :onsubmit => "$('indicator').style.display = 'inline';" do %>
+<%= form_for :photo, :action => url(:photo), :multipart => true, :onsubmit => "$('indicator').style.display = 'inline';" do %>
   <fieldset>
     <legend>Upload a photo</legend>
-    <p>Album: <%= select_control 'album_id', :collection => Album.for_select, :selected => (@photo.album.name rescue nil) -%></p>
-    <p>File: <%= file_control 'file' -%></p>
+    <p>Album: <%= select :album_id, :collection => Album.for_select, :selected => (@photo.album.name rescue nil) -%></p>
+    <p>File: <%= file_field :file -%></p>
   </fieldset>
   
   <p>
-    <%= submit_button 'Create' %> <img src='/images/ajax-loader.gif' id='indicator' style='display:none;' />
+    <%= submit 'Create' %> <img src='/images/ajax-loader.gif' id='indicator' style='display:none;' />
   </p>
-<% end -%>
+<% end =%>

@@ -4,9 +4,9 @@
 
 <%= error_messages_for :comment %>
 
-<% form_for :comment, :action => url(:comments) do %>
+<%= form_for :comment, :action => url(:comments) do %>
   <%= partial :comment_form %>
   <p>
-    <%= submit_button 'Create' %>
+    <%= submit 'Create' %>
   </p>
-<% end -%>
+<% end =%>
