@@ -21,23 +21,17 @@ function check_all(form_name, field_name, checkbox_value)
 </script>
 
 <%= form_for :permission, :action => url(:permission, @author), :id => 'permission_form' do -%>
-<%= hidden_field :name => '_method', :value => 'put' %>
+<%= hidden_field :name => '_method', :value => 'put' -%>
 <fieldset>
   <legend>Select Author's permissions</legend>
   <p>Select: <a href="#" onclick="check_all('permission_form', 'permissions[]', true); return false">all</a> | <a href="#" onclick="check_all('permission_form', 'permissions[]', false); return false">none</a></p>
   <ul style="list-style-type: none">
     <% @permissions.each do |p| -%>
-    <%
-      attr = { :name => 'permissions[]', :boolean => false, :value => p.id }
-      if @author.permissions.include?(p)
-        attr[:checked] = true
-      end
-    -%>
-      <li><%= checkbox attr -%> <%= p.name -%></li>
+      <li><input type="checkbox" value="<%= p.id -%>" name="permissions[]" <% if @author.permissions.include?(p) -%>checked="checked"<% end -%> /> <%= p.name -%></li>
     <% end -%>
   </ul>
 </fieldset>
 <p>
   <%= submit 'Save' %>
 </p>
-<% end -%>
+<% end =%>
