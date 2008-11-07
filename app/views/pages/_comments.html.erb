@@ -10,7 +10,7 @@
         <abbr title="<%= comment.created_at %>">said <%= time_lost_in_words comment.page.created_at, comment.created_at %> later:</abbr>
       </div>
       <div class="content">
-        <%= h(comment.comment) %>
+        <%= nl2br(h(comment.comment)) %>
       </div>
     </li>
     <% end -%>
