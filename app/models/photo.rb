@@ -2,7 +2,6 @@ class Photo < ActiveRecord::Base
   attr_accessor :file
   
   validates_presence_of :author_id, :album_id
-  validates_uniqueness_of :filename, :scope => :album_id
   
   belongs_to :album
   belongs_to :author
@@ -64,6 +63,9 @@ class Photo < ActiveRecord::Base
     end
     if self.file[:size] > 3 * 1048576
       self.errors.add(:file, 'File is too big (3MB max)')
+    end
+    if self.album.photos.count(:conditions => { :filename => self.file[:filename] }) > 0
+      self.errors.add(:file, 'already seems to exist in this album')
     end
     return false unless self.errors.empty?
     
