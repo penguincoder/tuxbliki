@@ -65,7 +65,11 @@ class Photos < Application
     @photo = Photo.find_by_id(params[:id])
     raise NotFound unless @photo
     if @photo.destroy
-      redirect url(:photos)
+      if @photo.album
+        redirect url(:album, @photo.album)
+      else
+        redirect url(:photos)
+      end
     else
       raise BadRequest
     end
