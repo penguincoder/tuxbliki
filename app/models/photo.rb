@@ -2,6 +2,7 @@ class Photo < ActiveRecord::Base
   attr_accessor :file
   
   validates_presence_of :author_id, :album_id
+  validates_uniqueness_of :filename, :scope => :album_id
   
   belongs_to :album
   belongs_to :author
