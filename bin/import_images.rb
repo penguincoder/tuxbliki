@@ -148,18 +148,22 @@ else
 end
 puts "* Processing #{files.size} files"
 
-# set up the mechanize page and form submission so that you only do this once
-page = agent.get("#{host_prefix}/photos/new")
-photo_form = page.forms.first
-photo_form['photo[album_id]'] = album
-
 # process
 files.each_with_index do |fname, idx|
   puts "-> (#{idx + 1} / #{files.size}) #{fname}"
   
+  # get the upload page
+  print "Fetching page... "
+  STDOUT.flush
+  page = agent.get("#{host_prefix}/photos/new")
+  photo_form = page.forms.first
+  photo_form['photo[album_id]'] = album
+  print "Done. "
+  STDOUT.flush
+  
   # determine picture size
   width, height = nil, nil
-  `identify #{fname}`.chomp.gsub(/ (\d+)x(\d+) /) do |match|
+  `identify "#{fname}"`.chomp.gsub(/ (\d+)x(\d+) /) do |match|
     width = $1.to_i
     height = $2.to_i
   end
