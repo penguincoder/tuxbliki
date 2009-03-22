@@ -80,7 +80,7 @@ addLoadEvent(function(){
 <body>
 <div id="container">
   <div id="headercontainer"><div id="header">
-    <span style="float: left; margin-right: 10px;"><img src="/images/<%= tuxconfig[:logo] -%>" /></span>
+    <span style="float: left; margin-right: 10px;"><a href="/"><img src="/images/<%= tuxconfig[:logo] -%>" /></a></span>
     <h1><%= @page_title or 'TuxBliki' -%></h1>
     <% if @secondary_title -%><h2><%= @secondary_title -%></h2><% end -%>
     <br style="clear: both" />
