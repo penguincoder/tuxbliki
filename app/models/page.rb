@@ -2,7 +2,7 @@ class Page < ActiveRecord::Base
   validates_format_of :name, :with => /^[\w ]+$/
   validates_uniqueness_of :name
   
-  has_many :comments, :order => 'created_at ASC'
+  has_many :comments, :order => 'created_at ASC', :dependent => :destroy
   has_and_belongs_to_many :tags, :order => 'tags.name ASC'
   belongs_to :author
   attr_protected :author_id
