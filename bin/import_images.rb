@@ -28,9 +28,6 @@
 # --username <username>
 #   The username in TuxBliki to use as the owner.
 #
-# --password <password>
-#   The username's password in TuxBliki. Check your shell logs...
-#
 # --server <server address>
 #   The server running TuxBliki, optional; defaults to http://penguincoder.org
 #
@@ -103,6 +100,12 @@ host_prefix = "#{server.gsub(/\/$/, '')}:#{port}"
 page = agent.get("#{host_prefix}/sessions/new")
 login_form = page.forms.first
 login_form.username = username
+print "Password: "
+STDOUT.flush
+system "stty -echo"
+password = STDIN.readline.chomp
+system "stty echo"
+puts ''
 login_form.password = password
 page = agent.submit(login_form, login_form.buttons.first)
 
