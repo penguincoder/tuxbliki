@@ -45,7 +45,6 @@ opts = GetoptLong.new(
   [ '--directory', GetoptLong::OPTIONAL_ARGUMENT ],
   [ '--album', GetoptLong::REQUIRED_ARGUMENT ],
   [ '--username', GetoptLong::REQUIRED_ARGUMENT ],
-  [ '--password', GetoptLong::REQUIRED_ARGUMENT ],
   [ '--server', GetoptLong::OPTIONAL_ARGUMENT ],
   [ '--port', GetoptLong::OPTIONAL_ARGUMENT ]
 )
@@ -68,8 +67,6 @@ opts.each do |opt, arg|
       album = arg
     when '--username'
       username = arg
-    when '--password'
-      password = arg
     when '--server'
       server = arg
     when '--port'
