@@ -1,4 +1,6 @@
 class Pages < Application
+  before :logged_in?, :only => [ :new, :edit, :create, :update, :delete ]
+  
   def index
     @pages = Page.find :all, :order => 'name ASC', :conditions => [ 'published = ?', false ]
     @secondary_title = 'Wiki Pages. En Masse.'
@@ -8,8 +10,10 @@ class Pages < Application
 
   def show
     @page = Page.find_by_name(params[:id].gsub(/_/, ' '))
-    if @page.nil?
+    if @page.nil? and logged_in?
       redirect url(:new_page, :new_name => params[:id])
+    elsif @page.nil?
+      raise NotFound
     else
       @comments = @page.comments
       @secondary_title = @page.name
