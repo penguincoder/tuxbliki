@@ -66,7 +66,7 @@ class Photos < Application
     raise NotFound unless @photo
     if @photo.destroy
       if @photo.album
-        redirect url(:album, @photo.album)
+        redirect url(:album, @photo.album.name.gsub(/ /, '_'))
       else
         redirect url(:photos)
       end
