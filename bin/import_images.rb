@@ -155,7 +155,7 @@ photo_form['photo[album_id]'] = album
 
 # process
 files.each_with_index do |fname, idx|
-  puts "-> #{fname}"
+  puts "-> (#{idx + 1} / #{files.size}) #{fname}"
   
   # determine picture size
   width, height = nil, nil
