@@ -30,9 +30,9 @@ class Album < ActiveRecord::Base
   end
   
   def self.popular_tags(limit = nil)
-    query = "SELECT tags.id, tags.name, count(*) AS count FROM albums_tags, tags, albums WHERE tags.id = tag_id AND albums_tags.album_id = albums.id GROUP BY tags.id, tags.name ORDER BY tags.name ASC"
+    query = "SELECT tags.id, tags.name, count(*) AS count FROM albums_tags, tags, albums WHERE tags.id = tag_id AND albums_tags.album_id = albums.id GROUP BY tags.id, tags.name ORDER BY count DESC"
     query << " LIMIT #{limit}" unless limit.nil?
-    Tag.find_by_sql(query)
+    Tag.find_by_sql(query).sort { |a, b| a.name <=> b.name }
   end
   
   protected

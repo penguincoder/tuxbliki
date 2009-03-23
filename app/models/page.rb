@@ -35,9 +35,9 @@ class Page < ActiveRecord::Base
   end
   
   def self.popular_tags(limit = nil)
-    query = "SELECT tags.id, tags.name, count(*) AS count FROM pages_tags, tags, pages WHERE tags.id = tag_id AND pages_tags.page_id = pages.id GROUP BY tags.id, tags.name ORDER BY tags.name ASC"
+    query = "SELECT tags.id, tags.name, count(*) AS count FROM pages_tags, tags, pages WHERE tags.id = tag_id AND pages_tags.page_id = pages.id GROUP BY tags.id, tags.name ORDER BY count DESC"
     query << " LIMIT #{limit}" unless limit.nil?
-    Tag.find_by_sql(query)
+    Tag.find_by_sql(query).sort { |a, b| a.name <=> b.name }
   end
   
   def cache_name
