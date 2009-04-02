@@ -23,14 +23,7 @@ module Merb
     def show_page_description(page)
       page_cache = Cache.get(page.cache_name)
       if page_cache.nil?
-        desc = h(page.description.to_s).to_s.gsub(/\&quot\;/, '"').gsub(/\&amp\;/, '&')
-        # i need pre/code block together... because i code :)
-        desc.gsub!("&lt;pre&gt;&lt;code&gt;", "<pre><code>")
-        desc.gsub!("&lt;/code&gt;&lt;/pre&gt;", "</code></pre>")
-        # allow github gists and whatever else in javascript chunks
-        desc.gsub!("&lt;script", "<script")
-        desc.gsub!("&gt;&lt;/script&gt;", "></script>")
-        rc = RedCloth.new(desc)
+        rc = RedCloth.new(page.description)
         rc.no_span_caps = true
         rc.filter_styles = true
         rc.filter_html = true
