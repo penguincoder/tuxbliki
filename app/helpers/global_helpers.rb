@@ -25,8 +25,6 @@ module Merb
       if page_cache.nil?
         rc = RedCloth.new(page.description)
         rc.no_span_caps = true
-        rc.filter_styles = true
-        rc.filter_html = true
         page_cache = rc.to_html.gsub(Page.wiki_word_pattern) do |match|
           pg_name = $1
           if Page.exists?(pg_name)
